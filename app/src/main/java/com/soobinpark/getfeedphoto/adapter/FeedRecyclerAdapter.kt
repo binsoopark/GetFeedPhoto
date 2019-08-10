@@ -1,16 +1,22 @@
 package com.soobinpark.getfeedphoto.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.soobinpark.getfeedphoto.R
 import com.soobinpark.getfeedphoto.data.FeedItem
 import kotlinx.android.synthetic.main.feed_list_item.view.*
 
 class FeedRecyclerAdapter(private val items: ArrayList<FeedItem>) :
     RecyclerView.Adapter<FeedRecyclerAdapter.ViewHolder>() {
+
+    companion object {
+        const val TAG = "FeedRecyclerAdapter"
+    }
 
     override fun getItemCount() = items.size
 
@@ -24,6 +30,16 @@ class FeedRecyclerAdapter(private val items: ArrayList<FeedItem>) :
         }
     }
 
+    fun addItem(item: FeedItem) {
+        items.add(item)
+        this.notifyItemInserted(items.indexOf(item))
+    }
+
+    fun clearIteams() {
+        items.clear()
+        this.notifyDataSetChanged()
+    }
+
     // RecyclerView가 초기화 될 때 호출됨
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedRecyclerAdapter.ViewHolder {
         val inflateView = LayoutInflater.from(parent.context).inflate(R.layout.feed_list_item, parent, false)
@@ -33,7 +49,8 @@ class FeedRecyclerAdapter(private val items: ArrayList<FeedItem>) :
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
         fun bind(listener: View.OnClickListener, item: FeedItem) {
-            view.iv_main_list_item_thumbnail.setImageDrawable(item.image)
+            Log.d(TAG, "item.imageUrl: ${item.imageUrl}")
+            item.imageUrl.let { Glide.with(view).load(it).into(view.iv_main_list_item_thumbnail) }
             view.tv_main_list_item_title.text = item.title
             view.setOnClickListener(listener)
         }

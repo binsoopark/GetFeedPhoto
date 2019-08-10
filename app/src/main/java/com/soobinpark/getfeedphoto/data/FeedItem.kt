@@ -1,7 +1,5 @@
 package com.soobinpark.getfeedphoto.data
 
-import android.graphics.drawable.Drawable
-
-class FeedItem(val image: Drawable, val title: String) {
+class FeedItem(val imageUrl: String?, val title: String) {
 
 }

@@ -3,17 +3,12 @@ package com.soobinpark.getfeedphoto.data.remote
 import android.util.Log
 import com.google.api.client.auth.oauth.OAuthHmacSigner
 import com.google.api.client.auth.oauth.OAuthParameters
-import com.google.api.client.auth.oauth.OAuthParameters.escape
-import com.google.api.client.auth.oauth.OAuthSigner
 import com.google.api.client.http.GenericUrl
-import com.google.common.collect.Multiset
-import com.google.common.collect.TreeMultiset
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
-import java.security.GeneralSecurityException
 import java.util.concurrent.TimeUnit
 
 object Okhttp3Retrofit2Manager {
@@ -41,7 +36,6 @@ object Okhttp3Retrofit2Manager {
 
         okHttpClient = OkHttpClient().newBuilder().apply {
             addInterceptor(httpLogging)
-//            addInterceptor(HeaderSettingInterceptor())
             addInterceptor(AuthorizationInterceptor(oAuthParams))
             connectTimeout(ALL_TIMEOUT, TimeUnit.SECONDS)
             writeTimeout(ALL_TIMEOUT, TimeUnit.SECONDS)

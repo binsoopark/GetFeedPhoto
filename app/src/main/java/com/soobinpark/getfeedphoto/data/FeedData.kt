@@ -9,13 +9,15 @@ class CurrentFeed {
 
 // JSON 객체기준
 data class TimelineFeedData(val text:String,
-                            val media:ArrayList<Media>
+                            val entities:Entities
 )
 
-data class FeedData(val text:String,
-                    val media:ArrayList<Media>)
+data class Entities(val media:ArrayList<Media>)
 
-data class Media(val mediaUrl: String,
+//data class FeedData(val text:String,
+//                    val media:ArrayList<Media>)
+
+data class Media(val media_url: String,
                  val sizes: Size)
 
 data class Size(val medium: Medium)
