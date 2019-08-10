@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface IRetrofitTwitter {
-    @GET("/statuses/home_timeline.json")
+    @GET("/1.1/statuses/home_timeline.json")
     fun requestStatusHomeTimeline(
         @Query("exclude_replies")   exclude_replies:String
     ) : Call<TimelineFeedData>

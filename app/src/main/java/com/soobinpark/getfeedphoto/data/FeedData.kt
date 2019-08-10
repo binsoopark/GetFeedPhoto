@@ -1,6 +1,6 @@
 package com.soobinpark.getfeedphoto.data
 
-data class TimelineFeedData(val feed: CurrentFeed)
+data class TimelineFeedData1(val feed: TimelineFeedData)
 
 class CurrentFeed {
     var text: String? = null
@@ -8,7 +8,7 @@ class CurrentFeed {
 }
 
 // JSON 객체기준
-data class FeedList(
+data class TimelineFeedData(
     val feeds:ArrayList<FeedData>
 )
 

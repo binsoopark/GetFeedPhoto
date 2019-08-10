@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 
 object Okhttp3Retrofit2Manager {
     private val ALL_TIMEOUT = 10L
-    private val TWITTER_API_HOST = "https://api.twitter.com/1.1/"
+    private val TWITTER_API_HOST = "https://api.twitter.com/"
     private val TWITTER_CONSUMER_KEY = "j5YhaJZRS57fbWUHwjokhtm6b"
     private val TWITTER_CONSUMER_SECRET = "iiH8F2WWw1xPqkpyeA6gTAKGwDowITyr3RhcHiz7EQmDGFW7VE"
     private val TWITTER_ACCESS_TOKEN = "1159133442891587584-Nuue2z3B2GKyVA3k75Meo5Z7vC1v1T"
@@ -75,10 +75,11 @@ object Okhttp3Retrofit2Manager {
             // Accept */*
             val request = chainRequest.newBuilder().apply{
                 addHeader("Accept", "application/json")
-                addHeader("oauth_token", TWITTER_CONSUMER_KEY)
                 addHeader("oauth_consumer_key", TWITTER_CONSUMER_KEY)
-                addHeader("oauth_consumer_key", TWITTER_CONSUMER_KEY)
-                addHeader("oauth_consumer_key", TWITTER_CONSUMER_KEY)
+                addHeader("oauth_consumer_secret", TWITTER_CONSUMER_SECRET)
+                addHeader("oauth_token", TWITTER_ACCESS_TOKEN)
+                addHeader("oauth_consumer_secret", TWITTER_TOKEN_SECRET)
+                addHeader("oauth_signature_method", "HMAC-SHA1")
             }.build()
 
             return chain.proceed(request)
