@@ -44,15 +44,15 @@ class MainActivity : AppCompatActivity() {
         val restClient: IRetrofitTwitter = Okhttp3Retrofit2Manager.getRetrofitService(IRetrofitTwitter::class.java)
 
         val currentFeed = restClient.requestStatusHomeTimeline("true")
-        currentFeed.enqueue(object : Callback<TimelineFeedData> {
-            override fun onResponse(call: Call<TimelineFeedData>?, response: Response<TimelineFeedData>?) {
+        currentFeed.enqueue(object : Callback<List<TimelineFeedData>> {
+            override fun onResponse(call: Call<List<TimelineFeedData>>?, response: Response<List<TimelineFeedData>>?) {
                 Log.d(TAG, "onResponse")
                 if(response != null && response.isSuccessful)
-                    refreshCurrentNewFeedsUI(response.body())
+                    refreshCurrentNewFeedsUI(response.body()!![0])
             }
 
-            override fun onFailure(call: Call<TimelineFeedData>?, t: Throwable?) {
-                Log.d(TAG, "onFailure")
+            override fun onFailure(call: Call<List<TimelineFeedData>>?, t: Throwable?) {
+                Log.d(TAG, "onFailure: "+t.toString())
                 errorMessage(message = t.toString())
             }
         })

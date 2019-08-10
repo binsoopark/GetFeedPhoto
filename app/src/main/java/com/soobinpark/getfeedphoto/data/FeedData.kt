@@ -8,8 +8,8 @@ class CurrentFeed {
 }
 
 // JSON 객체기준
-data class TimelineFeedData(
-    val feeds:ArrayList<FeedData>
+data class TimelineFeedData(val text:String,
+                            val media:ArrayList<Media>
 )
 
 data class FeedData(val text:String,
