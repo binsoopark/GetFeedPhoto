@@ -1,6 +1,6 @@
 package com.soobinpark.getfeedphoto.data.remote
 
-import com.soobinpark.getfeedphoto.data.TimelineFeedData
+import com.soobinpark.getfeedphoto.data.model.TimelineFeedData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

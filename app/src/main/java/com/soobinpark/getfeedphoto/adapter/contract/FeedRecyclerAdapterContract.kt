@@ -1,6 +1,6 @@
 package com.soobinpark.getfeedphoto.adapter.contract
 
-import com.soobinpark.getfeedphoto.data.FeedItem
+import com.soobinpark.getfeedphoto.data.model.FeedItem
 
 interface FeedRecyclerAdapterContract {
     interface View {

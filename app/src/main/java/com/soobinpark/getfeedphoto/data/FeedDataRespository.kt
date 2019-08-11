@@ -1,9 +1,9 @@
 package com.soobinpark.getfeedphoto.data
 
 import android.util.Log
+import com.soobinpark.getfeedphoto.data.model.TimelineFeedData
 import com.soobinpark.getfeedphoto.data.remote.IRetrofitTwitter
 import com.soobinpark.getfeedphoto.data.remote.Okhttp3Retrofit2Manager
-import com.soobinpark.getfeedphoto.ui.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

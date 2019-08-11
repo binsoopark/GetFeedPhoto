@@ -1,5 +1,7 @@
 package com.soobinpark.getfeedphoto.data
 
+import com.soobinpark.getfeedphoto.data.model.TimelineFeedData
+
 interface IFeedDataControl {
     interface Callback {
         fun onCompleted(list: ArrayList<TimelineFeedData>)

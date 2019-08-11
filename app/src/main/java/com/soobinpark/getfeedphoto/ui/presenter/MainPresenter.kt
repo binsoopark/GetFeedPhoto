@@ -4,9 +4,9 @@ import android.content.Context
 import android.util.Log
 import com.soobinpark.getfeedphoto.adapter.contract.FeedRecyclerAdapterContract
 import com.soobinpark.getfeedphoto.data.FeedDataRespository
-import com.soobinpark.getfeedphoto.data.FeedItem
+import com.soobinpark.getfeedphoto.data.model.FeedItem
 import com.soobinpark.getfeedphoto.data.IFeedDataControl
-import com.soobinpark.getfeedphoto.data.TimelineFeedData
+import com.soobinpark.getfeedphoto.data.model.TimelineFeedData
 
 class MainPresenter: MainContract.Presenter {
     lateinit override var view: MainContract.View

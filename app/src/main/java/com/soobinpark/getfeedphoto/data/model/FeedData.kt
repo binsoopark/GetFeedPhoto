@@ -1,4 +1,4 @@
-package com.soobinpark.getfeedphoto.data
+package com.soobinpark.getfeedphoto.data.model
 
 class FeedItem(val id_str: String, val imageUrl: String?, val title: String)
 
@@ -21,7 +21,8 @@ data class User(val id_str: String,
 )
 
 data class Media(val media_url: String,
-                 val sizes: Size)
+                 val sizes: Size
+)
 
 data class Size(val medium: MediaSizeMedium)
 

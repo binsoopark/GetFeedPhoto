@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.soobinpark.getfeedphoto.R
 import com.soobinpark.getfeedphoto.adapter.contract.FeedRecyclerAdapterContract
-import com.soobinpark.getfeedphoto.data.FeedItem
-import com.soobinpark.getfeedphoto.data.TimelineFeedData
+import com.soobinpark.getfeedphoto.data.model.FeedItem
 import kotlinx.android.synthetic.main.feed_list_item.view.*
 
 class FeedRecyclerAdapter(private val items: ArrayList<FeedItem>) :

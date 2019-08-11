@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.soobinpark.getfeedphoto.R
 import com.soobinpark.getfeedphoto.adapter.FeedRecyclerAdapter
 import com.soobinpark.getfeedphoto.data.FeedDataRespository
-import com.soobinpark.getfeedphoto.data.FeedItem
+import com.soobinpark.getfeedphoto.data.model.FeedItem
 import com.soobinpark.getfeedphoto.ui.presenter.MainContract
 import com.soobinpark.getfeedphoto.ui.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
