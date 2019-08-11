@@ -8,11 +8,29 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.soobinpark.getfeedphoto.R
+import com.soobinpark.getfeedphoto.adapter.contract.FeedRecyclerAdapterContract
 import com.soobinpark.getfeedphoto.data.FeedItem
+import com.soobinpark.getfeedphoto.data.TimelineFeedData
 import kotlinx.android.synthetic.main.feed_list_item.view.*
 
 class FeedRecyclerAdapter(private val items: ArrayList<FeedItem>) :
-    RecyclerView.Adapter<FeedRecyclerAdapter.ViewHolder>() {
+    RecyclerView.Adapter<FeedRecyclerAdapter.ViewHolder>(), FeedRecyclerAdapterContract.View, FeedRecyclerAdapterContract.Model {
+    override var onClick: ((Int) -> Unit?)? = null
+
+    override fun addItems(feedDataItems: ArrayList<FeedItem>) {
+        items.clear()
+        items.addAll(feedDataItems)
+    }
+
+    override fun clearItem() {
+        items.clear()
+    }
+
+    override fun getItem(pos: Int): FeedItem = items[pos]
+
+    override fun notifyAdapter() {
+        notifyDataSetChanged()
+    }
 
     companion object {
         const val TAG = "FeedRecyclerAdapter"
