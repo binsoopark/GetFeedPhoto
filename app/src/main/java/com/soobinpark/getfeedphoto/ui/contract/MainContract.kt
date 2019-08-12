@@ -1,6 +1,5 @@
-package com.soobinpark.getfeedphoto.ui.presenter
+package com.soobinpark.getfeedphoto.ui.contract
 
-import android.content.Context
 import com.soobinpark.getfeedphoto.adapter.contract.FeedRecyclerAdapterContract
 import com.soobinpark.getfeedphoto.data.FeedDataRespository
 
@@ -17,9 +16,9 @@ interface MainContract {
         var adapterModel: FeedRecyclerAdapterContract.Model
         var adapterView: FeedRecyclerAdapterContract.View?
 
-        fun loadItems(context: Context)
+        fun loadItems()
 
-        fun loadMoreFeed(context: Context)
+        fun loadMoreFeed()
     }
 
 }

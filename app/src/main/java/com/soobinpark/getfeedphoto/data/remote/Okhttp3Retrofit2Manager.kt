@@ -4,6 +4,11 @@ import android.util.Log
 import com.google.api.client.auth.oauth.OAuthHmacSigner
 import com.google.api.client.auth.oauth.OAuthParameters
 import com.google.api.client.http.GenericUrl
+import com.soobinpark.getfeedphoto.common.Constants.TWITTER_ACCESS_TOKEN
+import com.soobinpark.getfeedphoto.common.Constants.TWITTER_API_HOST
+import com.soobinpark.getfeedphoto.common.Constants.TWITTER_CONSUMER_KEY
+import com.soobinpark.getfeedphoto.common.Constants.TWITTER_CONSUMER_SECRET
+import com.soobinpark.getfeedphoto.common.Constants.TWITTER_TOKEN_SECRET
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -14,11 +19,6 @@ import java.util.concurrent.TimeUnit
 object Okhttp3Retrofit2Manager {
     const val TAG = "Okhttp3Retrofit2Manager"
     private val ALL_TIMEOUT = 10L
-    private val TWITTER_API_HOST = "https://api.twitter.com/"
-    private val TWITTER_CONSUMER_KEY = "j5YhaJZRS57fbWUHwjokhtm6b"
-    private val TWITTER_CONSUMER_SECRET = "iiH8F2WWw1xPqkpyeA6gTAKGwDowITyr3RhcHiz7EQmDGFW7VE"
-    private val TWITTER_ACCESS_TOKEN = "1159133442891587584-Nuue2z3B2GKyVA3k75Meo5Z7vC1v1T"
-    private val TWITTER_TOKEN_SECRET = "GNYa04Vvam5A2piV78GFoQPPhP8xJEd6kf9QWkNUmGucR"
 
     private var okHttpClient: OkHttpClient
     private var retrofit: Retrofit

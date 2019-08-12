@@ -1,6 +1,5 @@
 package com.soobinpark.getfeedphoto.adapter.contract
 
-import android.view.View
 import com.soobinpark.getfeedphoto.data.model.FeedItem
 
 interface FeedRecyclerAdapterContract {

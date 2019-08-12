@@ -1,14 +1,16 @@
 package com.soobinpark.getfeedphoto.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.soobinpark.getfeedphoto.R
 import com.soobinpark.getfeedphoto.common.Constants
-import com.soobinpark.getfeedphoto.ui.presenter.FeedDetailContract
+import com.soobinpark.getfeedphoto.ui.contract.FeedDetailContract
 import com.soobinpark.getfeedphoto.ui.presenter.FeedDetailPresenter
 import kotlinx.android.synthetic.main.activity_feed_detail.*
 import kotlinx.android.synthetic.main.my_toolbar.*
@@ -51,16 +53,23 @@ class FeedDetailActivity: AppCompatActivity(), FeedDetailContract.View {
         authorName: String,
         authorImageUrl: String,
         datetime: String,
-        mainImageUrl: String,
+        mainImageUrl: String?,
         text: String
     ) {
         Log.d(TAG, "fillContents")
         tv_feed_detail_content_author.text = authorName
         tv_feed_detail_content_datetime.text = datetime
-        tv_feed_detail_content_text_mention.text = Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            tv_feed_detail_content_text_mention.text = Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT)
+        } else {
+            tv_feed_detail_content_text_mention.text = text
+        }
 
         Glide.with(this).load(authorImageUrl).into(iv_feed_detail_content_author)
-        Glide.with(this).load(mainImageUrl).into(iv_feed_detail_content_media_picture)
+        mainImageUrl?.let {
+            Glide.with(this).load(it).into(iv_feed_detail_content_media_picture)
+            iv_feed_detail_content_media_picture.visibility = View.VISIBLE
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

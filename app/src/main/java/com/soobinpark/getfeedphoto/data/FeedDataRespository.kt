@@ -1,6 +1,7 @@
 package com.soobinpark.getfeedphoto.data
 
 import android.util.Log
+import com.soobinpark.getfeedphoto.common.Constants
 import com.soobinpark.getfeedphoto.data.model.TimelineFeedData
 import com.soobinpark.getfeedphoto.data.remote.IRetrofitTwitter
 import com.soobinpark.getfeedphoto.data.remote.Okhttp3Retrofit2Manager
@@ -29,7 +30,7 @@ object FeedDataRespository: IFeedDataControl {
     override fun getRecentlyFeedData(callback: IFeedDataControl.Callback?) {
         val restClient: IRetrofitTwitter = Okhttp3Retrofit2Manager.getRetrofitService(IRetrofitTwitter::class.java)
 
-        val currentFeed = restClient.requestStatusHomeTimeline("true", 30, 3999999999999999999L)
+        val currentFeed = restClient.requestStatusHomeTimeline("true", Constants.COUNT_ON_PAGE, Constants.LARGEST_MAX_ID)
         currentFeed.enqueue(object : Callback<List<TimelineFeedData>> {
             override fun onResponse(call: Call<List<TimelineFeedData>>?, response: Response<List<TimelineFeedData>>?) {
                 Log.d(TAG, "onResponse")
@@ -52,7 +53,7 @@ object FeedDataRespository: IFeedDataControl {
     override fun getFeedListFromFeedId(maxId: Long, callback: IFeedDataControl.Callback?) {
         val restClient: IRetrofitTwitter = Okhttp3Retrofit2Manager.getRetrofitService(IRetrofitTwitter::class.java)
 
-        val currentFeed = restClient.requestStatusHomeTimeline("true", 30, maxId)
+        val currentFeed = restClient.requestStatusHomeTimeline("true", Constants.COUNT_ON_PAGE, maxId)
         currentFeed.enqueue(object : Callback<List<TimelineFeedData>> {
             override fun onResponse(call: Call<List<TimelineFeedData>>?, response: Response<List<TimelineFeedData>>?) {
                 Log.d(TAG, "onResponse")

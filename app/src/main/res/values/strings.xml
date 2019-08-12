@@ -3,4 +3,8 @@
     <string name="thumbnail_content_description">Thumbnail</string>
     <string name="title_list_my_twitter_feed">트위터 나의 피드 조회</string>
     <string name="title_load_more">더 보기</string>
+    <string name="content_description_media_picture">Media Picture</string>
+    <string name="title_dummy_text">DUMMY TEXT</string>
+    <string name="title_author">작성자</string>
+    <string name="content_description_profile_image">Profile Image</string>
 </resources>

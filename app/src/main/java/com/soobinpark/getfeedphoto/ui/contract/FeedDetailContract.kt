@@ -1,4 +1,4 @@
-package com.soobinpark.getfeedphoto.ui.presenter
+package com.soobinpark.getfeedphoto.ui.contract
 
 import com.soobinpark.getfeedphoto.data.FeedDataRespository
 
@@ -9,7 +9,7 @@ interface FeedDetailContract {
         fun fillContents(authorName: String,
                          authorImageUrl: String,
                          datetime: String,
-                         mainImageUrl: String,
+                         mainImageUrl: String?,
                          text: String)
     }
 

@@ -1,5 +1,6 @@
 package com.soobinpark.getfeedphoto.data.model
 
+// 목록에서 사용할 Data Object
 class FeedItem(val id_str: String, val imageUrl: String?, val title: String)
 
 // JSON 객체기준

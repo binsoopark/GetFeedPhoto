@@ -2,8 +2,8 @@ package com.soobinpark.getfeedphoto.ui.presenter
 
 import com.soobinpark.getfeedphoto.data.FeedDataRespository
 import com.soobinpark.getfeedphoto.data.IFeedDataControl
-import com.soobinpark.getfeedphoto.data.model.Media
 import com.soobinpark.getfeedphoto.data.model.TimelineFeedData
+import com.soobinpark.getfeedphoto.ui.contract.FeedDetailContract
 
 class FeedDetailPresenter : FeedDetailContract.Presenter {
     override lateinit var view: FeedDetailContract.View

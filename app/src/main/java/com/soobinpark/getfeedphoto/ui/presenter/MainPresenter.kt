@@ -1,12 +1,11 @@
 package com.soobinpark.getfeedphoto.ui.presenter
 
-import android.content.Context
-import android.util.Log
 import com.soobinpark.getfeedphoto.adapter.contract.FeedRecyclerAdapterContract
 import com.soobinpark.getfeedphoto.data.FeedDataRespository
 import com.soobinpark.getfeedphoto.data.model.FeedItem
 import com.soobinpark.getfeedphoto.data.IFeedDataControl
 import com.soobinpark.getfeedphoto.data.model.TimelineFeedData
+import com.soobinpark.getfeedphoto.ui.contract.MainContract
 
 class MainPresenter: MainContract.Presenter {
     override lateinit var view: MainContract.View
@@ -25,10 +24,10 @@ class MainPresenter: MainContract.Presenter {
         }
     }
 
-    override fun loadItems(context: Context) {
+    override fun loadItems() {
         feedDataRepo.getRecentlyFeedData(object: IFeedDataControl.Callback {
             override fun onCompleted(list: ArrayList<TimelineFeedData>) {
-                Log.d("TEST", "onCompleted")
+//                Log.d("TEST", "onCompleted")
                 // list에 아이템을 모두 추가해준다
                 val array = ArrayList<FeedItem>()
                 for (item in list) {
@@ -47,7 +46,7 @@ class MainPresenter: MainContract.Presenter {
                 adapterModel.addItems(array)
                 // adapter에 아이템이 새롭게 반영된 것을 알려준다.
                 adapterView?.notifyAdapter()
-
+                view.notifyUsingToast("최근 목록을 가져왔습니다.")
             }
 
             override fun onError(errorMsg: String) {
@@ -56,7 +55,7 @@ class MainPresenter: MainContract.Presenter {
         })
     }
 
-    override fun loadMoreFeed(context: Context) {
+    override fun loadMoreFeed() {
         val maxFeedId = feedDataRepo.getBottomFeedId()
         feedDataRepo.getFeedListFromFeedId(maxFeedId, object: IFeedDataControl.Callback {
             override fun onCompleted(list: ArrayList<TimelineFeedData>) {
@@ -82,7 +81,7 @@ class MainPresenter: MainContract.Presenter {
                 adapterModel.addItems(array)
                 // adapter에 아이템이 새롭게 반영된 것을 알려준다.
                 adapterView?.notifyAdapter()
-
+                view.notifyUsingToast("추가 목록을 가져왔습니다.")
             }
 
             override fun onError(errorMsg: String) {

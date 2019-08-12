@@ -1,5 +1,6 @@
 package com.soobinpark.getfeedphoto.adapter
 
+import android.os.Build
 import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
@@ -57,8 +58,12 @@ class FeedRecyclerAdapter(private val items: ArrayList<FeedItem>) :
         fun bind(listener: ((Int) -> Unit)?, item: FeedItem, pos: Int) {
             Log.d(TAG, "item.imageUrl: ${item.imageUrl}")
             item.imageUrl.let { Glide.with(view).load(it).into(view.iv_main_list_item_thumbnail) }
-            view.tv_main_list_item_title.text = Html.fromHtml(item.title, Html.FROM_HTML_MODE_COMPACT)
             view.setOnClickListener{ listener?.invoke(pos) }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                view.tv_main_list_item_title.text = Html.fromHtml(item.title, Html.FROM_HTML_MODE_COMPACT)
+            } else {
+                view.tv_main_list_item_title.text = item.title
+            }
         }
     }
 }

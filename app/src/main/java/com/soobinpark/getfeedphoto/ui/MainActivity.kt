@@ -13,12 +13,16 @@ import com.soobinpark.getfeedphoto.adapter.FeedRecyclerAdapter
 import com.soobinpark.getfeedphoto.common.Constants
 import com.soobinpark.getfeedphoto.data.FeedDataRespository
 import com.soobinpark.getfeedphoto.data.model.FeedItem
-import com.soobinpark.getfeedphoto.ui.presenter.MainContract
+import com.soobinpark.getfeedphoto.ui.contract.MainContract
 import com.soobinpark.getfeedphoto.ui.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.my_toolbar.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
+    companion object {
+        private const val TAG = "MainActivity"
+    }
+
     private val adapter: FeedRecyclerAdapter
     private val presenter: MainPresenter
 
@@ -31,10 +35,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             adapterModel = adapter
             adapterView = adapter
         }
-    }
-
-    companion object {
-        private const val TAG = "MainActivity"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,16 +65,16 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             }
         })
 
-        presenter.loadItems(this)
+        presenter.loadItems()
 
         btn_more.setOnClickListener {
-            presenter.loadMoreFeed(this)
+            presenter.loadMoreFeed()
             it.visibility = View.GONE
         }
     }
 
     override fun notifyUsingToast(text: String) {
-        Toast.makeText(this, "MainActivity $text", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "[MainActivity]\n$text", Toast.LENGTH_SHORT).show()
     }
 
     override fun moveToFeedDetailScreen(strId: String) {
