@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.feed_list_item.view.*
 
 class FeedRecyclerAdapter(private val items: ArrayList<FeedItem>) :
     RecyclerView.Adapter<FeedRecyclerAdapter.ViewHolder>(), FeedRecyclerAdapterContract.View, FeedRecyclerAdapterContract.Model {
-    override var onClick: ((Int) -> Unit?)? = null
+    override var onClick: ((Int) -> Unit)? = null
 
     override fun addItems(feedDataItems: ArrayList<FeedItem>) {
         items.clear()
@@ -40,9 +40,9 @@ class FeedRecyclerAdapter(private val items: ArrayList<FeedItem>) :
     // View가 생성되면 호출됨
     override fun onBindViewHolder(holder: FeedRecyclerAdapter.ViewHolder, position: Int) {
         val item = items[position]
-        val listener = View.OnClickListener { it -> Toast.makeText(it.context, "Clicked: ${item.title}", Toast.LENGTH_SHORT).show() }
+        val listener = onClick
         holder.apply {
-            bind(listener, item)
+            bind(listener, item, position)
             itemView.tag = item
         }
     }
@@ -65,11 +65,11 @@ class FeedRecyclerAdapter(private val items: ArrayList<FeedItem>) :
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
-        fun bind(listener: View.OnClickListener, item: FeedItem) {
+        fun bind(listener: ((Int) -> Unit)?, item: FeedItem, pos: Int) {
             Log.d(TAG, "item.imageUrl: ${item.imageUrl}")
             item.imageUrl.let { Glide.with(view).load(it).into(view.iv_main_list_item_thumbnail) }
             view.tv_main_list_item_title.text = item.title
-            view.setOnClickListener(listener)
+            view.setOnClickListener{ listener?.invoke(pos) }
         }
     }
 }

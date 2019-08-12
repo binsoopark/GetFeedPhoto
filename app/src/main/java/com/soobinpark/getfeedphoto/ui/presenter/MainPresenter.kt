@@ -9,9 +9,9 @@ import com.soobinpark.getfeedphoto.data.IFeedDataControl
 import com.soobinpark.getfeedphoto.data.model.TimelineFeedData
 
 class MainPresenter: MainContract.Presenter {
-    lateinit override var view: MainContract.View
-    lateinit override var feedDataRepo: FeedDataRespository
-    lateinit override var adapterModel: FeedRecyclerAdapterContract.Model
+    override lateinit var view: MainContract.View
+    override lateinit var feedDataRepo: FeedDataRespository
+    override lateinit var adapterModel: FeedRecyclerAdapterContract.Model
     override var adapterView: FeedRecyclerAdapterContract.View? = null
         set(value) {
             field = value
@@ -21,6 +21,7 @@ class MainPresenter: MainContract.Presenter {
     private fun onClickListener(pos: Int) {
         adapterModel.getItem(pos).let {
             view.notifyUsingToast("Information: ${it.id_str}, ${it.title}")
+            view.moveToFeedDetailScreen(it.id_str)
         }
     }
 

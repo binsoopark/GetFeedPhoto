@@ -13,17 +13,17 @@ object FeedDataRespository: IFeedDataControl {
     val TAG = "FeedDataRepository"
 
     val feedDataList = ArrayList<TimelineFeedData>()
+    val feedDataMap = HashMap<String, TimelineFeedData>()
 
     override fun getFeedDataByFeedId(feedId: String, callback: IFeedDataControl.Callback?) {
-        for(item in feedDataList) {
-            if(item.id_str == feedId) {
-                val arrayList = ArrayList<TimelineFeedData>()
-                arrayList.add(item)
-                callback?.onCompleted(arrayList)
-                return
-            }
+        feedDataMap[feedId]?.let {
+            val arrayList = ArrayList<TimelineFeedData>()
+            arrayList.add(it)
+            callback?.onCompleted(arrayList)
+            return
+        }.let {
+            callback?.onError("Could not get matching data from saved list.")
         }
-        callback?.onError("Could not get matching data from saved list.")
     }
 
     override fun getRecentlyFeedData(callback: IFeedDataControl.Callback?) {
@@ -33,9 +33,11 @@ object FeedDataRespository: IFeedDataControl {
         currentFeed.enqueue(object : Callback<List<TimelineFeedData>> {
             override fun onResponse(call: Call<List<TimelineFeedData>>?, response: Response<List<TimelineFeedData>>?) {
                 Log.d(TAG, "onResponse")
+
                 if(response != null && response.isSuccessful) {
                     feedDataList.clear()
                     feedDataList.addAll(response.body()!!)
+                    storeFeedDataToMap(response.body()!!) // Search용 관리를 위해 map으로 변환한다.
                     callback?.onCompleted(feedDataList)
                 }
             }
@@ -45,6 +47,12 @@ object FeedDataRespository: IFeedDataControl {
                 callback?.onError(t.toString())
             }
         })
+    }
+
+    private fun storeFeedDataToMap(list: List<TimelineFeedData>) {
+        for(item in list) {
+            feedDataMap[item.id_str] = item
+        }
     }
 
 }

@@ -7,10 +7,11 @@ import com.soobinpark.getfeedphoto.data.FeedDataRespository
 interface MainContract {
     interface View {
         fun notifyUsingToast(text: String)
+        fun moveToFeedDetailScreen(strId: String)
     }
 
     interface Presenter {
-        var view: MainContract.View
+        var view: View
         var feedDataRepo: FeedDataRespository
 
         var adapterModel: FeedRecyclerAdapterContract.Model

@@ -1,5 +1,7 @@
 package com.soobinpark.getfeedphoto.ui
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -8,15 +10,17 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.soobinpark.getfeedphoto.R
 import com.soobinpark.getfeedphoto.adapter.FeedRecyclerAdapter
+import com.soobinpark.getfeedphoto.common.Constants
 import com.soobinpark.getfeedphoto.data.FeedDataRespository
 import com.soobinpark.getfeedphoto.data.model.FeedItem
 import com.soobinpark.getfeedphoto.ui.presenter.MainContract
 import com.soobinpark.getfeedphoto.ui.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.my_toolbar.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
-    val adapter: FeedRecyclerAdapter
-    val presenter: MainPresenter
+    private val adapter: FeedRecyclerAdapter
+    private val presenter: MainPresenter
 
     init {
         val list = ArrayList<FeedItem>()
@@ -36,6 +40,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        my_toolbar.title = "Get Feed Photo"
+        setSupportActionBar(my_toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         recyclerview_main_feed.adapter = adapter
 
@@ -58,6 +66,14 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun notifyUsingToast(text: String) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "MainActivity $text", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun moveToFeedDetailScreen(strId: String) {
+        Log.d(TAG, "moveToFeedDetailScreen $strId")
+        val intent = Intent(this@MainActivity, FeedDetailActivity::class.java)
+        intent.putExtra(Constants.EXTRA_KEY_FEED_ID_STR, strId)
+        startActivity(intent)
+        overridePendingTransition(0, 0)
     }
 }

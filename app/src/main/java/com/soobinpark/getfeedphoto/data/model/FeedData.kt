@@ -10,7 +10,7 @@ data class TimelineFeedData(val text: String,
                             val user: User
 )
 
-data class Entities(val media:ArrayList<Media>)
+data class Entities(val media:ArrayList<Media>?)
 
 data class User(val id_str: String,
                 val name: String,

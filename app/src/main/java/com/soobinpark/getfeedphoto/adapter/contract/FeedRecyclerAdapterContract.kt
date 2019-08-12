@@ -1,10 +1,12 @@
 package com.soobinpark.getfeedphoto.adapter.contract
 
+import android.view.View
 import com.soobinpark.getfeedphoto.data.model.FeedItem
 
 interface FeedRecyclerAdapterContract {
     interface View {
-        var onClick: ((Int) -> Unit?)?
+//        var onClick: ((Int) -> android.view.View.OnClickListener)
+        var onClick: ((Int) -> Unit)?
 
         fun notifyAdapter()
     }

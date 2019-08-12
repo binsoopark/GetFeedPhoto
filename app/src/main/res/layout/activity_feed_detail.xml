@@ -3,11 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include
+        layout="@layout/my_toolbar"/>
     <LinearLayout
         android:id="@+id/ll_feed_detail_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rl_my_toolbar"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
@@ -16,21 +18,25 @@
         <TextView
             android:id="@+id/tv_feed_detail_lable_author"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="작성자"
+            android:gravity="center_vertical"
             android:textSize="17sp"
             />
         <TextView
             android:id="@+id/tv_feed_detail_content_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
             android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
             android:textSize="20sp"
             />
         <ImageView
             android:id="@+id/iv_feed_detail_content_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:contentDescription="Profile Image" />
     </LinearLayout>
     <TextView
@@ -56,7 +62,7 @@
         android:visibility="gone"
         />
     <TextView
-        android:id="@+id/iv_feed_detail_content_text_mention"
+        android:id="@+id/tv_feed_detail_content_text_mention"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -64,6 +70,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_feed_detail_content_media_picture"
         app:layout_constraintStart_toStartOf="parent"
         android:text="DUMMY TEXT"
+        android:autoLink="all"
         android:textSize="20sp"
         android:textColor="@android:color/background_dark"
         android:visibility="visible"
