@@ -1,9 +1,9 @@
 package com.soobinpark.getfeedphoto.ui
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -54,15 +54,23 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerview_main_feed.canScrollVertically(-1)) {
                     Log.d(TAG, "top of the list")
+                    btn_more.visibility = View.GONE
                 } else if (!recyclerview_main_feed.canScrollVertically(1)) {
                     Log.d(TAG, "end of the list")
+                    btn_more.visibility = View.VISIBLE
                 } else {
                     Log.d(TAG, "idle")
+                    btn_more.visibility = View.GONE
                 }
             }
         })
 
         presenter.loadItems(this)
+
+        btn_more.setOnClickListener {
+            presenter.loadMoreFeed(this)
+            it.visibility = View.GONE
+        }
     }
 
     override fun notifyUsingToast(text: String) {

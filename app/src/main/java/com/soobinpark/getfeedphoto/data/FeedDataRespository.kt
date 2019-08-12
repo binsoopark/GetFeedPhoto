@@ -29,7 +29,7 @@ object FeedDataRespository: IFeedDataControl {
     override fun getRecentlyFeedData(callback: IFeedDataControl.Callback?) {
         val restClient: IRetrofitTwitter = Okhttp3Retrofit2Manager.getRetrofitService(IRetrofitTwitter::class.java)
 
-        val currentFeed = restClient.requestStatusHomeTimeline("true")
+        val currentFeed = restClient.requestStatusHomeTimeline("true", 30, 3999999999999999999L)
         currentFeed.enqueue(object : Callback<List<TimelineFeedData>> {
             override fun onResponse(call: Call<List<TimelineFeedData>>?, response: Response<List<TimelineFeedData>>?) {
                 Log.d(TAG, "onResponse")
@@ -47,6 +47,34 @@ object FeedDataRespository: IFeedDataControl {
                 callback?.onError(t.toString())
             }
         })
+    }
+
+    override fun getFeedListFromFeedId(maxId: Long, callback: IFeedDataControl.Callback?) {
+        val restClient: IRetrofitTwitter = Okhttp3Retrofit2Manager.getRetrofitService(IRetrofitTwitter::class.java)
+
+        val currentFeed = restClient.requestStatusHomeTimeline("true", 30, maxId)
+        currentFeed.enqueue(object : Callback<List<TimelineFeedData>> {
+            override fun onResponse(call: Call<List<TimelineFeedData>>?, response: Response<List<TimelineFeedData>>?) {
+                Log.d(TAG, "onResponse")
+
+                if(response != null && response.isSuccessful) {
+                    feedDataList.clear()
+                    feedDataList.addAll(response.body()!!)
+                    storeFeedDataToMap(response.body()!!) // Search용 관리를 위해 map으로 변환한다.
+                    callback?.onCompleted(feedDataList)
+                }
+            }
+
+            override fun onFailure(call: Call<List<TimelineFeedData>>?, t: Throwable?) {
+                Log.d(TAG, "onFailure: "+t.toString())
+                callback?.onError(t.toString())
+            }
+        })
+    }
+
+    override fun getBottomFeedId(): Long {
+        val arraySize = feedDataList.size
+        return feedDataList[arraySize-1].id_str.toLong()
     }
 
     private fun storeFeedDataToMap(list: List<TimelineFeedData>) {

@@ -1,10 +1,10 @@
 package com.soobinpark.getfeedphoto.adapter
 
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.soobinpark.getfeedphoto.R
@@ -17,7 +17,6 @@ class FeedRecyclerAdapter(private val items: ArrayList<FeedItem>) :
     override var onClick: ((Int) -> Unit)? = null
 
     override fun addItems(feedDataItems: ArrayList<FeedItem>) {
-        items.clear()
         items.addAll(feedDataItems)
     }
 
@@ -38,7 +37,7 @@ class FeedRecyclerAdapter(private val items: ArrayList<FeedItem>) :
     override fun getItemCount() = items.size
 
     // View가 생성되면 호출됨
-    override fun onBindViewHolder(holder: FeedRecyclerAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         val listener = onClick
         holder.apply {
@@ -47,20 +46,10 @@ class FeedRecyclerAdapter(private val items: ArrayList<FeedItem>) :
         }
     }
 
-    fun addItem(item: FeedItem) {
-        items.add(item)
-        this.notifyItemInserted(items.indexOf(item))
-    }
-
-    fun clearIteams() {
-        items.clear()
-        this.notifyDataSetChanged()
-    }
-
     // RecyclerView가 초기화 될 때 호출됨
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedRecyclerAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflateView = LayoutInflater.from(parent.context).inflate(R.layout.feed_list_item, parent, false)
-        return FeedRecyclerAdapter.ViewHolder(inflateView)
+        return ViewHolder(inflateView)
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
@@ -68,7 +57,7 @@ class FeedRecyclerAdapter(private val items: ArrayList<FeedItem>) :
         fun bind(listener: ((Int) -> Unit)?, item: FeedItem, pos: Int) {
             Log.d(TAG, "item.imageUrl: ${item.imageUrl}")
             item.imageUrl.let { Glide.with(view).load(it).into(view.iv_main_list_item_thumbnail) }
-            view.tv_main_list_item_title.text = item.title
+            view.tv_main_list_item_title.text = Html.fromHtml(item.title, Html.FROM_HTML_MODE_COMPACT)
             view.setOnClickListener{ listener?.invoke(pos) }
         }
     }

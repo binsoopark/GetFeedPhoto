@@ -10,21 +10,23 @@
     >
     <ImageView
             android:id="@+id/iv_main_list_item_thumbnail"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:adjustViewBounds="true"
-            android:contentDescription="Thumbnail"/>
+            android:contentDescription="@string/thumbnail_content_description"/>
     <TextView
             android:id="@+id/tv_main_list_item_title"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/iv_main_list_item_thumbnail"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:maxLines="1"
+            android:ellipsize="end"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,4 +11,8 @@ interface IFeedDataControl {
     fun getFeedDataByFeedId(feedId: String, callback: Callback?)
 
     fun getRecentlyFeedData(callback: Callback?)
+
+    fun getBottomFeedId(): Long
+
+    fun getFeedListFromFeedId(maxId: Long, callback: Callback?)
 }

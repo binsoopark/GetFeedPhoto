@@ -17,8 +17,20 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:textSize="18sp"
-        android:text="트위터 나의 피드 조회"
+        android:text="@string/title_list_my_twitter_feed"
+        android:gravity="center_vertical"
     />
+
+    <Button
+        android:id="@+id/btn_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tv_main_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="10dp"
+        android:text="@string/title_load_more"
+        android:visibility="gone"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_main_feed"

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Get Feed Photo</string>
+    <string name="thumbnail_content_description">Thumbnail</string>
+    <string name="title_list_my_twitter_feed">트위터 나의 피드 조회</string>
+    <string name="title_load_more">더 보기</string>
 </resources>

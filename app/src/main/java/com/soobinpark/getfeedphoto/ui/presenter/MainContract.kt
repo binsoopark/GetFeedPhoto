@@ -18,6 +18,8 @@ interface MainContract {
         var adapterView: FeedRecyclerAdapterContract.View?
 
         fun loadItems(context: Context)
+
+        fun loadMoreFeed(context: Context)
     }
 
 }

@@ -32,7 +32,7 @@ class MainPresenter: MainContract.Presenter {
                 // list에 아이템을 모두 추가해준다
                 val array = ArrayList<FeedItem>()
                 for (item in list) {
-                    item?.let {
+                    item.let {
                         val txt = it.text
                         if(it.entities.media != null) {
                             val imgUrl = it.entities.media[0].media_url
@@ -41,11 +41,47 @@ class MainPresenter: MainContract.Presenter {
                             array.add(FeedItem(it.id_str, null, txt))
                         }
 
-                        adapterModel.addItems(array)
-                        // adapter에 아이템이 새롭게 반영된 것을 알려준다.
-                        adapterView?.notifyAdapter()
                     }
                 }
+                adapterModel.clearItem()
+                adapterModel.addItems(array)
+                // adapter에 아이템이 새롭게 반영된 것을 알려준다.
+                adapterView?.notifyAdapter()
+
+            }
+
+            override fun onError(errorMsg: String) {
+                view.notifyUsingToast(errorMsg)
+            }
+        })
+    }
+
+    override fun loadMoreFeed(context: Context) {
+        val maxFeedId = feedDataRepo.getBottomFeedId()
+        feedDataRepo.getFeedListFromFeedId(maxFeedId, object: IFeedDataControl.Callback {
+            override fun onCompleted(list: ArrayList<TimelineFeedData>) {
+                // list에 아이템을 모두 추가해준다
+                val array = ArrayList<FeedItem>()
+                var isFirst = true
+                for (item in list) {
+                    if(isFirst){
+                        isFirst = false
+                        continue
+                    }
+                    item.let {
+                        val txt = it.text
+                        if(it.entities.media != null) {
+                            val imgUrl = it.entities.media[0].media_url
+                            array.add(FeedItem(it.id_str, imgUrl, txt))
+                        } else {
+                            array.add(FeedItem(it.id_str, null, txt))
+                        }
+                    }
+                }
+
+                adapterModel.addItems(array)
+                // adapter에 아이템이 새롭게 반영된 것을 알려준다.
+                adapterView?.notifyAdapter()
 
             }
 
